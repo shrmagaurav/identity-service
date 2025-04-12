@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: identityservice
+#  flyway:
+#    enabled: true
+#    locations: classpath:db/migration
+#    baseline-on-migrate : true
+  datasource:
+    url: jdbc:mysql://localhost:3306/identity
+    username: root
+    password: toor
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8082
+jwt:
+  secret:
+    token: thisismyjwttokenvalidationsecretstringtoencryptallthetokenthatwillbeprovidetouserswhileauthentication
+
+
+grpc:
+  server:
+    port: 9091
+  default-scheme: discovery
+  client:
+    GLOBAL:
+      negotiation-type: PLAINTEXT
+    template-service:
+      address: static://localhost:9090  # Update this to your Template Service gRPC server
+    customer-core:
+      address: static://localhost:9092
+
+
+#grpc:
+#  server:
+#    port: 35511
+#  default-scheme: discovery
+#  client:
+#    GLOBAL:
+#      negotiation-type: PLAINTEXT
+#    ape:
+#      address: static://ape:35505
+#    media-service:
+#      address: dns:///media-manager:35505
+#    address-validation:
+#      address: dns:///address-validation:35505
+#    store-master:
+#      address: dns:///localhost:35508
+#    template-render:
+#      address: dns:///templates-service:35505
+#    product-service:
+#      address: dns:///localhost:35509
+#    customer-identity:
+#      address: dns:///localhost:35507
+#    scheduler:
+#      address: dns:///scheduler:9000

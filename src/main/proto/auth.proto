@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.learning.ecommerce.auth";
+
+// Request for customer validation
+message ValidateUserRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// Response from customer validation
+message ValidateUserResponse {
+  bool is_valid = 1;
+}
+
+// Customer Service gRPC
+service CustomerService {
+  rpc ValidateUser(ValidateUserRequest) returns (ValidateUserResponse);
+}
+
+// Request for authentication (Identity Service)
+message AuthRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// Response for authentication (Identity Service)
+message AuthResponse {
+  string token = 1;
+  string message = 2;
+}
+
+// Identity Service gRPC
+service IdentityService {
+  rpc AuthenticateUser (AuthRequest) returns (AuthResponse);
+}

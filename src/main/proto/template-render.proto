@@ -1,0 +1,19 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option go_package = "proto/pb/rt/templates";
+
+package com.learning.ecommerce;
+
+message RenderRequest {
+  string filename = 1;
+  map<string, string> data = 2;
+  string dataAsJson = 3;
+}
+
+message Chunk {
+  bytes b = 1;
+}
+
+service TemplateRenderService {
+  rpc renderTemplate (RenderRequest) returns (stream Chunk);
+}
